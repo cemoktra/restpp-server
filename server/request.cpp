@@ -1,4 +1,5 @@
 #include "request.hpp"
+#include "exceptions.hpp"
 #include <iostream>
 #include <strings.h>
 
@@ -25,7 +26,8 @@ namespace restpp {
       m_method = request::GET;
     else if (request::str_compare(method, "post"))
       m_method = request::POST;
-    // else throw
+    else 
+      throw restpp_unsupported_method_exception();
   }
 
   void request::parseHeaders(std::queue<std::string_view> lines)
@@ -53,7 +55,7 @@ namespace restpp {
         const auto pos = str.find_first_of(delim, lastPos);
 
         if (lastPos != pos)
-            output.push(str.substr(lastPos, pos-lastPos -1));
+            output.push(str.substr(lastPos, pos - lastPos));
 
         if (pos == std::string_view::npos)
             break;

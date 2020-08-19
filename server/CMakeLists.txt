@@ -2,12 +2,16 @@ set(SOURCES
   server.cpp
   request.cpp
   response.cpp
+  router.cpp
 )
 
 set (HEADERS
+  interfaces/router.hpp
   server.hpp
   request.hpp
   response.hpp
+  router.hpp
+  exceptions.hpp
 )
 
 add_library(restpp_server ${SOURCES} ${HEADERS})
