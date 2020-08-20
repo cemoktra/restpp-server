@@ -3,6 +3,7 @@ set(SOURCES
   request.cpp
   response.cpp
   router.cpp
+  utils.cpp
 )
 
 set (HEADERS
@@ -12,6 +13,7 @@ set (HEADERS
   response.hpp
   router.hpp
   exceptions.hpp
+  utils.hpp
 )
 
 add_library(restpp_server ${SOURCES} ${HEADERS})

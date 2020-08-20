@@ -90,7 +90,6 @@ namespace restpp
     auto response_str = response->toString();
     // std::cout << response_str << std::endl;
     std::vector<char> bytes(response_str.begin(), response_str.end());
-    bytes.push_back('\0');
     send(sock, &bytes.front(), bytes.size(), 0);
 
     free(addr);
