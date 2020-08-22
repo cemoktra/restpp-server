@@ -26,10 +26,10 @@ int main(int argc, char **args)
   auto router = std::make_shared<restpp::router>();
   router->get("/hello", hello);
 
-
   restpp::server server;
-  auto result = server.serve(5000);
   server.setRouter(router);
+
+  auto result = server.serve(5000);
   while (std::future_status::ready != result.wait_for(std::chrono::seconds(1)))
   {
     std::this_thread::sleep_for(std::chrono::duration<int, std::milli>(500));
