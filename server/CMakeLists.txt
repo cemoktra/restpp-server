@@ -3,6 +3,8 @@ set(SOURCES
   request.cpp
   response.cpp
   router.cpp
+  route.cpp
+  routenode.cpp
   utils.cpp
 )
 
@@ -12,6 +14,8 @@ set (HEADERS
   request.hpp
   response.hpp
   router.hpp
+  route.hpp
+  routenode.hpp
   exceptions.hpp
   utils.hpp
 )

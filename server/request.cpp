@@ -1,6 +1,7 @@
 #include "request.hpp"
-#include "exceptions.hpp"
+#include "route.hpp"
 #include "utils.hpp"
+#include "exceptions.hpp"
 #include <iostream>
 #include <strings.h>
 
@@ -16,11 +17,18 @@ namespace restpp {
     parseHeaders(lines);
   }
 
+  std::shared_ptr<route> request::get_route()
+  {
+    if (!m_route)
+      m_route = route::create(m_route_string);
+    return m_route;
+  }
+
   void request::parseRequestLine(std::string_view line)
   {
     auto request_details = utils::split(line, " ");
     auto method = request_details.front(); request_details.pop();
-    auto requestUri = request_details.front(); request_details.pop();
+    m_route_string = request_details.front(); request_details.pop();
     auto httpVersion = request_details.front(); request_details.pop();
 
     if (utils::str_compare(method, "get"))

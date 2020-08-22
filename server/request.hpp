@@ -7,6 +7,8 @@
 
 
 namespace restpp {
+  class route;
+
   class request {
     public:
       enum Method {
@@ -18,12 +20,16 @@ namespace restpp {
 
       Method method();
 
+      std::shared_ptr<route> get_route();
+
     private:
       request(std::queue<std::string_view> lines);
       void parseRequestLine(std::string_view line);
       void parseHeaders(std::queue<std::string_view>& lines);
 
       Method m_method;
+      std::string m_route_string;
+      std::shared_ptr<route> m_route;
       std::map<std::string, std::string> m_headers;
   };
 }

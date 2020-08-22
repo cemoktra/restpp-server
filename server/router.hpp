@@ -1,10 +1,20 @@
 #pragma once
 
 #include "interfaces/router.hpp"
+#include <memory>
+#include <vector>
 
 namespace restpp {
+  class route;
+
   class router : public interfaces::router_interface {
     public:
-      bool route(std::shared_ptr<request> request, std::shared_ptr<response> response) override;
+      void get(const std::string& route, std::function<void(std::shared_ptr<request>, std::shared_ptr<response>)> callback) override;
+      void post(const std::string& route, std::function<void(std::shared_ptr<request>, std::shared_ptr<response>)> callback) override;
+
+      bool route_request(std::shared_ptr<request> request, std::shared_ptr<response> response) override;
+
+    private:
+      std::vector<std::shared_ptr<route>> m_routes;
   };
 }

@@ -25,9 +25,9 @@ namespace restpp
   void server::stop()
   {
     std::cout << "stopping server" << std::endl;
+    m_stop = true;
     shutdown(m_sock, SHUT_RD);
     close(m_sock);
-    m_stop = true;
   }
 
   std::future<void> server::serve(unsigned int port)
@@ -85,10 +85,10 @@ namespace restpp
     std::cout << "responding " << sock << std::endl;
 
     if (m_router)
-      m_router->route(request, response);
+      m_router->route_request(request, response);
     
     auto response_str = response->toString();
-    // std::cout << response_str << std::endl;
+    std::cout << response_str << std::endl;
     std::vector<char> bytes(response_str.begin(), response_str.end());
     send(sock, &bytes.front(), bytes.size(), 0);
 
