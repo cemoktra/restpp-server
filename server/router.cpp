@@ -1,4 +1,5 @@
 #include "router.hpp"
+#include "types.hpp"
 #include "request.hpp"
 #include "response.hpp"
 #include "route.hpp"
@@ -6,15 +7,14 @@
 
 
 namespace restpp {
-  void router::get(const std::string& route, std::function<void(std::shared_ptr<request>, std::shared_ptr<response>)> callback)
+  void router::get(const std::string& route, route_callback callback)
   {
-    // TODO: add type
-    m_routes.emplace_back(route::create(route, callback));
+    m_routes.emplace_back(route::create(request_method::GET, route, callback));
   }
 
-  void router::post(const std::string& route, std::function<void(std::shared_ptr<request>, std::shared_ptr<response>)> callback)
+  void router::post(const std::string& route, route_callback callback)
   {
-
+    m_routes.emplace_back(route::create(request_method::POST, route, callback));
   }
 
   bool router::route_request(std::shared_ptr<request> request, std::shared_ptr<response> response)
@@ -24,9 +24,9 @@ namespace restpp {
 
     for (auto route : m_routes) {
       auto result = route->match(request->get_route());
-      if (!full_match and result == route::full_match)
+      if (!full_match and result == route_match::full_match)
         full_match = route;
-      else if (!param_match and result == route::param_match)
+      else if (!param_match and result == route_match::param_match)
         param_match = route;
     }
 

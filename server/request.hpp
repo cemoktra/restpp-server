@@ -1,5 +1,6 @@
 #pragma once
 
+#include "types.hpp"
 #include <string_view>
 #include <memory>
 #include <queue>
@@ -11,14 +12,9 @@ namespace restpp {
 
   class request {
     public:
-      enum Method {
-        GET,
-        POST
-      };
-
       static std::shared_ptr<request> parse(std::string_view req);
 
-      Method method();
+      request_method method();
 
       std::shared_ptr<route> get_route();
 
@@ -27,7 +23,7 @@ namespace restpp {
       void parseRequestLine(std::string_view line);
       void parseHeaders(std::queue<std::string_view>& lines);
 
-      Method m_method;
+      request_method m_method;
       std::string m_route_string;
       std::shared_ptr<route> m_route;
       std::map<std::string, std::string> m_headers;

@@ -1,8 +1,11 @@
 #pragma once
 
+#include "types.hpp"
 #include <memory>
 #include <functional>
 #include <vector>
+#include <map>
+
 
 namespace restpp {
   class request;
@@ -10,16 +13,11 @@ namespace restpp {
   class routenode;
 
   class route {
-    public:
-      enum route_match {
-        no_match = 0x00,
-        param_match = 0x01,
-        full_match = 0x11
-      };
-
+    public:      
       static std::shared_ptr<route> create(
+        request_method method,
         const std::string& route, 
-        std::function<void(std::shared_ptr<request>, std::shared_ptr<response>)> callback = nullptr
+        route_callback callback = nullptr
       );
 
       route_match match(std::shared_ptr<route> other);
@@ -28,11 +26,14 @@ namespace restpp {
       
     private:
       route(
+        request_method method,
         const std::string& route, 
-        std::function<void(std::shared_ptr<request>, std::shared_ptr<response>)> callback = nullptr
+        route_callback callback = nullptr
       );
 
-      std::function<void(std::shared_ptr<request>, std::shared_ptr<response>)> m_callback;
+      request_method m_method;
+      route_callback m_callback;
       std::vector<std::shared_ptr<routenode>> m_route;
+      std::map<std::string, std::string> m_params;
   };
 }

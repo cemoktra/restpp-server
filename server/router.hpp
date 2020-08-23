@@ -9,8 +9,8 @@ namespace restpp {
 
   class router : public interfaces::router_interface {
     public:
-      void get(const std::string& route, std::function<void(std::shared_ptr<request>, std::shared_ptr<response>)> callback) override;
-      void post(const std::string& route, std::function<void(std::shared_ptr<request>, std::shared_ptr<response>)> callback) override;
+      void get(const std::string& route, route_callback callback) override;
+      void post(const std::string& route, route_callback callback) override;
 
       bool route_request(std::shared_ptr<request> request, std::shared_ptr<response> response) override;
 

@@ -20,9 +20,12 @@ namespace restpp {
     return m_name == other->m_name;
   }
 
-  bool routenode::param_match(std::shared_ptr<routenode> other)
+  std::optional<std::pair<std::string, std::string>> routenode::param_match(std::shared_ptr<routenode> other)
   {
-    return m_type == param or other->m_type == param;
+    if (m_type == param and other->m_type == fixed)
+      return std::make_pair(m_name.substr(1), other->name());
+    else
+      return std::nullopt;
   }
 
   std::string routenode::name()

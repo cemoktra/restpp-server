@@ -20,7 +20,7 @@ namespace restpp {
   std::shared_ptr<route> request::get_route()
   {
     if (!m_route)
-      m_route = route::create(m_route_string);
+      m_route = route::create(m_method, m_route_string);
     return m_route;
   }
 
@@ -32,9 +32,9 @@ namespace restpp {
     auto httpVersion = request_details.front(); request_details.pop();
 
     if (utils::str_compare(method, "get"))
-      m_method = request::GET;
+      m_method = request_method::GET;
     else if (utils::str_compare(method, "post"))
-      m_method = request::POST;
+      m_method = request_method::POST;
     else 
       throw restpp_unsupported_method_exception();
   }
@@ -49,7 +49,7 @@ namespace restpp {
     }
   }
 
-  request::Method request::method()
+  request_method request::method()
   {
     return m_method;
   }

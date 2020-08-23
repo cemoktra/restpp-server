@@ -16,6 +16,7 @@ set (HEADERS
   router.hpp
   route.hpp
   routenode.hpp
+  types.hpp
   exceptions.hpp
   utils.hpp
 )

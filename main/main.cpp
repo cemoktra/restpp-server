@@ -5,7 +5,7 @@
 #include <chrono>
 #include <csignal>
 #include <thread>
-
+#include <sstream>
 
 std::atomic<bool> quit(false); 
 
@@ -13,9 +13,18 @@ void signalHandler( int signum ) {
   quit.store(true);
 }
 
-void hello(std::shared_ptr<restpp::request> req, std::shared_ptr<restpp::response> res)
+void hello(std::shared_ptr<restpp::request> req, std::shared_ptr<restpp::response> res, std::optional<std::map<std::string, std::string>> params)
 {
   res->text("world");
+  res->status(restpp::response::OK);
+}
+
+void hello_name(std::shared_ptr<restpp::request> req, std::shared_ptr<restpp::response> res, std::optional<std::map<std::string, std::string>> params)
+{
+  std::ostringstream oss;
+  auto paramsMap = params.value_or(std::map<std::string, std::string>());
+  oss << "Hello " << paramsMap["name"] << "!";
+  res->text(oss.str());
   res->status(restpp::response::OK);
 }
 
@@ -25,6 +34,7 @@ int main(int argc, char **args)
 
   auto router = std::make_shared<restpp::router>();
   router->get("/hello", hello);
+  router->get("/hello/:name", hello_name);
 
   restpp::server server;
   server.setRouter(router);
