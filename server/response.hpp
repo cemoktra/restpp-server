@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <string>
+#include <map>
 
 namespace restpp
 {
@@ -19,6 +20,8 @@ namespace restpp
             void status(const http_status& status);
             void text(const std::string& text);
 
+            void add_header(const std::string& key, const std::string& value);
+
         private:
             response();
 
@@ -26,5 +29,6 @@ namespace restpp
 
             http_status m_status;
             std::string m_text;
+            std::map<std::string, std::string> m_headers;
     };
 } // namespace restpp

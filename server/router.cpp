@@ -23,7 +23,7 @@ namespace restpp {
     std::shared_ptr<route> param_match;
 
     for (auto route : m_routes) {
-      auto result = route->match(request->get_route());
+      auto result = request->match(route);
       if (!full_match and result == route_match::full_match)
         full_match = route;
       else if (!param_match and result == route_match::param_match)

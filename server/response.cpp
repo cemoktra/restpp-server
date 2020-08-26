@@ -42,4 +42,9 @@ namespace restpp {
           return "UNKNOWN";
       }
     }
+
+    void response::add_header(const std::string& key, const std::string& value)
+    {
+      m_headers.insert(std::make_pair<>(key, value));
+    }
 }

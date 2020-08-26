@@ -16,7 +16,7 @@ namespace restpp {
 
       request_method method();
 
-      std::shared_ptr<route> get_route();
+      route_match match(std::shared_ptr<route> other_route);
 
     private:
       request(std::queue<std::string_view> lines);
@@ -27,5 +27,6 @@ namespace restpp {
       std::string m_route_string;
       std::shared_ptr<route> m_route;
       std::map<std::string, std::string> m_headers;
+      std::map<std::string, std::string> m_params;
   };
 }
