@@ -10,12 +10,10 @@ namespace restpp::utils {
     {
         const auto pos = str.find_first_of(delim, lastPos);
 
-        if (lastPos != pos)
-            output.push(str.substr(lastPos, pos - lastPos));
-
         if (pos == std::string_view::npos)
-            break;
+          break;
 
+        output.push(str.substr(lastPos, pos - lastPos));
         lastPos = pos + 1;
     }
 

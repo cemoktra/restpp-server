@@ -1,0 +1,2 @@
+add_executable(bench_request request_benchmarks.cpp)
+target_link_libraries(bench_request benchmark::benchmark restpp_server)
