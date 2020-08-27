@@ -15,6 +15,7 @@ namespace restpp {
   {
     parseRequestLine(lines.front()); lines.pop();
     parseHeaders(lines);
+    parseText(lines);
   }
 
   route_match request::match(std::shared_ptr<route> other_route)
@@ -49,8 +50,21 @@ namespace restpp {
     }
   }
 
+  void request::parseText(std::queue<std::string_view>& lines)
+  {
+    while (lines.size()) {
+      auto line = lines.front(); lines.pop();
+      m_text = m_text + std::string(line);
+    }
+  }
+
   request_method request::method()
   {
     return m_method;
+  }
+
+  std::string request::text()
+  {
+    return m_text;
   }
 }

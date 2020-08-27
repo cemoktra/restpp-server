@@ -5,6 +5,8 @@
 #include "route.hpp"
 #include "utils.hpp"
 
+#include <iostream>
+
 
 namespace restpp {
   void router::get(const std::string& route, route_callback callback)
@@ -27,7 +29,7 @@ namespace restpp {
       if (!full_match and result == route_match::full_match)
         full_match = route;
       else if (!param_match and result == route_match::param_match)
-        param_match = route;
+        param_match = route;      
     }
 
     if (full_match) {
