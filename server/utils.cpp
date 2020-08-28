@@ -1,20 +1,15 @@
 #include "utils.hpp"
+#include <algorithm>
 
 namespace restpp::utils {
   std::queue<std::string_view> split(std::string_view str, std::string_view delim)
   {
     std::queue<std::string_view> output;
-    size_t lastPos = 0;
 
-    while (lastPos < str.size())
-    {
-        const auto pos = str.find_first_of(delim, lastPos);
+    for (auto first = str.data(), second = str.data(), last = first + str.size(); second != last && first != last; first = second + 1) {
+      second = std::find_first_of(first, last, std::cbegin(delim), std::cend(delim));
 
-        if (pos == std::string_view::npos)
-          break;
-
-        output.push(str.substr(lastPos, pos - lastPos));
-        lastPos = pos + 1;
+      output.emplace(first, second - first);
     }
 
     return output;
