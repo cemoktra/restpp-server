@@ -20,4 +20,4 @@ jobs:
     - name: build
       run: cmake --build build
     - name: run request parsing benchmark
-      run: cd benchmarks && bench_request
+      run: cd build/benchmarks && bench_request --benchmark_min_time=10
