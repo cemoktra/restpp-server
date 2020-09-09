@@ -24,4 +24,3 @@ static void BM_RequestParsing(benchmark::State& state) {
 
 BENCHMARK(BM_RequestParsing);
 
-BENCHMARK_MAIN();
