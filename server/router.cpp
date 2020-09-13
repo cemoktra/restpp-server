@@ -26,8 +26,10 @@ namespace restpp {
 
     for (auto route : m_routes) {
       auto result = request->match(route);
-      if (!full_match and result == route_match::full_match)
+      if (!full_match and result == route_match::full_match) {
         full_match = route;
+        break;
+      }
       else if (!param_match and result == route_match::param_match)
         param_match = route;      
     }
