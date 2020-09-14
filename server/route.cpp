@@ -32,6 +32,16 @@ namespace restpp {
     return std::shared_ptr<route>(route_object);
   }
 
+  route_callback route::callback()
+  {
+    return m_callback;
+  }
+
+  std::vector<std::shared_ptr<routenode>> route::nodes()
+  {
+    return m_route;
+  }
+
   route_match route::match(std::shared_ptr<route> other)
   {
     int result = full_match;

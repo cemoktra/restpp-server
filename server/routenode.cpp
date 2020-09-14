@@ -32,4 +32,9 @@ namespace restpp {
   {
     return m_name;
   }
+
+  nodetype routenode::type()
+  {
+    return m_type;
+  }
 }

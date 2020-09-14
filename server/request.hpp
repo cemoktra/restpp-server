@@ -18,6 +18,7 @@ namespace restpp {
 
       route_match match(std::shared_ptr<route> other_route);
 
+      std::shared_ptr<route> get_route();
       std::string text();
 
     private:

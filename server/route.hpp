@@ -23,6 +23,9 @@ namespace restpp {
       route_match match(std::shared_ptr<route> other);
 
       void execute(std::shared_ptr<request> req, std::shared_ptr<response> res);
+
+      route_callback callback();
+      std::vector<std::shared_ptr<routenode>> nodes();
       
     private:
       route(

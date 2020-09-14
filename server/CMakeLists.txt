@@ -5,6 +5,7 @@ set(SOURCES
   router.cpp
   route.cpp
   routenode.cpp
+  routetree.cpp
   utils.cpp
 )
 
@@ -16,6 +17,7 @@ set (HEADERS
   router.hpp
   route.hpp
   routenode.hpp
+  routetree.hpp
   types.hpp
   exceptions.hpp
   utils.hpp
