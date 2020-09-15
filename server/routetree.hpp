@@ -3,6 +3,7 @@
 #include "types.hpp"
 #include <memory>
 #include <map>
+#include <unordered_map>
 
 namespace restpp
 {

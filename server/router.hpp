@@ -17,6 +17,8 @@ namespace restpp {
 
       bool route_request(std::shared_ptr<request> request, std::shared_ptr<response> response) override;
 
+      bool route_request_tree(std::shared_ptr<request> request, std::shared_ptr<response> response);
+
     private:
       std::vector<std::shared_ptr<route>> m_routes;
       std::shared_ptr<routetree> m_root;
