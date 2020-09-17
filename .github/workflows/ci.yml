@@ -18,6 +18,6 @@ jobs:
     - name: configure
       run: mkdir build && cd build && cmake ..
     - name: build
-      run: cmake --build build
+      run: cmake -DCMAKE_BUILD_TYPE=Release --build build
     - name: benchmarks
-      run: build/benchmarks/bench --benchmark_min_time=10
+      run: build/benchmarks/bench --benchmark_min_time=5
