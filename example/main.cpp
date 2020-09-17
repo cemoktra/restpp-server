@@ -20,7 +20,7 @@ class my_backend {
   public:
     void hello(std::shared_ptr<restpp::request> req, std::shared_ptr<restpp::response> res, std::optional<std::map<std::string, std::string>> params)
     {
-      res->text("{\"message\": \"hello world!\"");
+      res->text("{\"message\": \"hello world!\"}");
       res->add_header("content-type", "application/json");
       res->status(restpp::response::OK);
     }

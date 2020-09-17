@@ -15,10 +15,14 @@ static std::shared_ptr<restpp::router> create_router()
 
     for (auto part_1 : route_chars) {
         for (auto part_2 : route_chars) {
-            std::ostringstream oss;
-            oss << "/" << (char) part_1 << "/" << (char) part_2;
+            for (auto part_3 : route_chars) {
+                for (auto part_4 : route_chars) {
+                    std::ostringstream oss;
+                    oss << "/" << (char) part_1 << "/" << (char) part_2 << "/" << (char) part_3 << "/" << (char) part_4;
 
-            router->get(oss.str(), nullptr);
+                    router->get(oss.str(), nullptr);
+                }
+            }
         }
     }
 
@@ -37,7 +41,6 @@ static void BM_Routing(benchmark::State& state, const std::string& route) {
     state.SetItemsProcessed(state.iterations());
 }
 
-
-BENCHMARK_CAPTURE(BM_Routing, "route_aa", "/a/a");
-BENCHMARK_CAPTURE(BM_Routing, "route_mn", "/m/n");
-BENCHMARK_CAPTURE(BM_Routing, "route_zz", "/z/z");
+BENCHMARK_CAPTURE(BM_Routing, "route_aaaa", "/a/a/a/a");
+BENCHMARK_CAPTURE(BM_Routing, "route_mnmn", "/m/n/m/n");
+BENCHMARK_CAPTURE(BM_Routing, "route_zzzz", "/z/z/z/z");
