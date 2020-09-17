@@ -41,23 +41,6 @@ static void BM_Routing(benchmark::State& state, const std::string& route) {
     state.SetItemsProcessed(state.iterations());
 }
 
-static void BM_Routing_Tree(benchmark::State& state, const std::string& route) {
-    // Perform setup here
-    auto router = create_router();
-    auto request_str = "GET " + route + " HTTP/1.1\n\n";
-    auto request = restpp::request::parse(request_str);
-
-    for (auto _ : state) {
-        router->route_request_tree(request, nullptr);
-    }
-    state.SetItemsProcessed(state.iterations());
-}
-
-
 BENCHMARK_CAPTURE(BM_Routing, "route_aaaa", "/a/a/a/a");
 BENCHMARK_CAPTURE(BM_Routing, "route_mnmn", "/m/n/m/n");
 BENCHMARK_CAPTURE(BM_Routing, "route_zzzz", "/z/z/z/z");
-
-BENCHMARK_CAPTURE(BM_Routing_Tree, "route_aaaa", "/a/a/a/a");
-BENCHMARK_CAPTURE(BM_Routing_Tree, "route_mnmn", "/m/n/m/n");
-BENCHMARK_CAPTURE(BM_Routing_Tree, "route_zzzz", "/z/z/z/z");

@@ -24,13 +24,6 @@ namespace restpp {
       m_route = route::create(m_method, m_route_string);
     return m_route;
   }
-
-  route_match request::match(std::shared_ptr<route> other_route)
-  {
-    if (!m_route)
-      m_route = route::create(m_method, m_route_string);
-    return other_route->match(m_route);
-  }
   
   void request::parseRequestLine(std::string_view line)
   {
